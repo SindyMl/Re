@@ -75,6 +75,16 @@
   align-items: center;
 }
 
+.about-photo {
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-heavy);
+  border: 3px solid var(--dark-beige);
+}
+
 .about-image-placeholder {
   width: 100%;
   max-width: 400px;
@@ -97,12 +107,10 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(139, 69, 19, 0.1),
-    transparent
-  );
+  background: linear-gradient(45deg,
+      transparent,
+      rgba(139, 69, 19, 0.1),
+      transparent);
   animation: aboutShimmer 4s infinite;
 }
 
@@ -110,6 +118,7 @@
   0% {
     transform: translateX(-100%) translateY(-100%) rotate(45deg);
   }
+
   100% {
     transform: translateX(100%) translateY(100%) rotate(45deg);
   }
@@ -122,9 +131,12 @@
 }
 
 @keyframes gentle-float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -304,10 +316,21 @@
   animation: featureSlideIn 0.6s ease forwards;
 }
 
-.feature-item:nth-child(1) { animation-delay: 0.2s; }
-.feature-item:nth-child(2) { animation-delay: 0.3s; }
-.feature-item:nth-child(3) { animation-delay: 0.4s; }
-.feature-item:nth-child(4) { animation-delay: 0.5s; }
+.feature-item:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.feature-item:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.feature-item:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.feature-item:nth-child(4) {
+  animation-delay: 0.5s;
+}
 
 @keyframes featureSlideIn {
   to {
@@ -323,8 +346,13 @@
   animation: cardSlideIn 0.8s ease forwards;
 }
 
-.mission-card { animation-delay: 0.6s; }
-.vision-card { animation-delay: 0.8s; }
+.mission-card {
+  animation-delay: 0.6s;
+}
+
+.vision-card {
+  animation-delay: 0.8s;
+}
 
 @keyframes cardSlideIn {
   to {

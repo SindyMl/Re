@@ -25,13 +25,31 @@
 }
 
 /* Logo */
+.navbar-logo a {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+}
+
+.navbar-logo .logo-image {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo .logo-image:hover {
+  transform: scale(1.05);
+}
+
 .navbar-logo .logo-text {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
   color: var(--primary-brown);
   font-family: 'Georgia', serif;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: 1px;
   transition: color 0.3s ease;
 }
 
@@ -189,8 +207,12 @@
     padding: var(--spacing-xs) 0;
   }
 
+  .navbar-logo .logo-image {
+    height: 40px;
+  }
+
   .navbar-logo .logo-text {
-    font-size: 1.75rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -199,7 +221,13 @@
     width: 90%;
   }
 
+  .navbar-logo .logo-image {
+    height: 35px;
+  }
+
   .navbar-logo .logo-text {
-    font-size: 1.5rem;
+    font-size: 1rem;
+    display: none;
+    /* Hide text on very small screens */
   }
 }

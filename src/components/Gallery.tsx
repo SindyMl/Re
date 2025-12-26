@@ -5,61 +5,98 @@ import '../styles/global.css';
 const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
-  // Placeholder gallery images with categories
+  // Gallery images with actual files and pricing in Rands
   const galleryImages: GalleryImage[] = [
     {
       id: '1',
-      url: 'box-braids-1',
-      alt: 'Beautiful box braids hairstyle',
-      category: 'box-braids'
+      url: '1.jpeg',
+      alt: 'Cornrows',
+      category: 'cornrows',
+      price: 'R100'
     },
     {
       id: '2',
-      url: 'cornrows-1',
-      alt: 'Elegant cornrows design',
-      category: 'cornrows'
+      url: '2.jpeg',
+      alt: 'Box Braids',
+      category: 'box-braids',
+      price: 'R250'
     },
     {
       id: '3',
-      url: 'faux-locs-1',
-      alt: 'Stylish faux locs',
-      category: 'faux-locs'
+      url: '3.jpeg',
+      alt: 'Cornrows',
+      category: 'cornrows',
+      price: 'R100'
     },
     {
       id: '4',
-      url: 'lashes-1',
-      alt: 'Professional lash extensions',
-      category: 'lashes'
+      url: '4.jpeg',
+      alt: 'Box Braids',
+      category: 'box-braids',
+      price: 'R180'
     },
     {
       id: '5',
-      url: 'box-braids-2',
-      alt: 'Long box braids with beads',
-      category: 'box-braids'
+      url: '5.jpeg',
+      alt: 'Box Braids',
+      category: 'box-braids',
+      price: 'R180'
     },
     {
       id: '6',
-      url: 'cornrows-2',
-      alt: 'Intricate cornrow patterns',
-      category: 'cornrows'
+      url: '6.jpeg',
+      alt: 'Box Braids',
+      category: 'box-braids',
+      price: 'R280'
     },
     {
       id: '7',
-      url: 'faux-locs-2',
-      alt: 'Shoulder-length faux locs',
-      category: 'faux-locs'
+      url: '7.jpeg',
+      alt: 'Box Braids',
+      category: 'box-braids',
+      price: 'R280'
     },
     {
       id: '8',
-      url: 'lashes-2',
-      alt: 'Volume lash extensions',
-      category: 'lashes'
+      url: '8.jpeg',
+      alt: 'Box Braids',
+      category: 'box-braids',
+      price: 'R300'
     },
     {
       id: '9',
-      url: 'box-braids-3',
-      alt: 'Short box braids style',
-      category: 'box-braids'
+      url: '9.jpeg',
+      alt: 'Lash Extensions',
+      category: 'lashes',
+      price: 'R120'
+    },
+    {
+      id: '12',
+      url: '12.jpeg',
+      alt: 'Lash Extensions',
+      category: 'lashes',
+      price: 'R120'
+    },
+    {
+      id: '13',
+      url: '13.jpeg',
+      alt: 'Lash Extensions',
+      category: 'lashes',
+      price: 'R150'
+    },
+    {
+      id: '14',
+      url: '14.jpeg',
+      alt: 'Lash Extensions',
+      category: 'lashes',
+      price: 'R150'
+    },
+    {
+      id: '15',
+      url: '15.jpeg',
+      alt: 'Lash Extensions',
+      category: 'lashes',
+      price: 'R120'
     }
   ];
 
@@ -75,7 +112,6 @@ const Gallery: React.FC = () => {
     const icons: { [key: string]: string } = {
       'box-braids': '💇‍♀️',
       'cornrows': '🎀',
-      'faux-locs': '✨',
       'lashes': '👁️'
     };
     return icons[category] || '💎';
@@ -87,27 +123,37 @@ const Gallery: React.FC = () => {
         <div className="container">
           <h2 className="section-title">Our Work</h2>
           <p className="gallery-intro">
-            Explore our portfolio of beautiful hairstyles and lash extensions. 
+            Explore our portfolio of beautiful hairstyles and lash extensions.
             Each look is crafted with precision and care to enhance your natural beauty.
           </p>
           <div className="gallery-grid">
             {galleryImages.map((image) => (
-              <div 
-                key={image.id} 
-                className="gallery-item"
+              <div
+                key={image.id}
+                className="gallery-card"
                 onClick={() => openLightbox(image)}
               >
-                <div className="gallery-image-placeholder">
-                  <div className="placeholder-content">
-                    <span className="gallery-icon">{getCategoryIcon(image.category)}</span>
-                    <p>{image.alt}</p>
+                <div className="gallery-image-container">
+                  <img
+                    src={`/images/${image.url}`}
+                    alt={image.alt}
+                    className="gallery-image"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const placeholder = target.nextElementSibling as HTMLElement;
+                      if (placeholder) placeholder.style.display = 'flex';
+                    }}
+                  />
+                  <div className="gallery-image-placeholder" style={{ display: 'none' }}>
+                    <div className="placeholder-content">
+                      <span className="gallery-icon">{getCategoryIcon(image.category)}</span>
+                      <p>{image.alt}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="gallery-overlay">
-                  <div className="overlay-content">
-                    <span className="category-icon">{getCategoryIcon(image.category)}</span>
-                    <p className="image-title">{image.alt}</p>
-                  </div>
+                <div className="gallery-price-tag">
+                  <p className="image-price">{image.price}</p>
                 </div>
               </div>
             ))}
@@ -123,7 +169,17 @@ const Gallery: React.FC = () => {
               ×
             </button>
             <div className="lightbox-image">
-              <div className="lightbox-placeholder">
+              <img
+                src={`/images/${selectedImage.url}`}
+                alt={selectedImage.alt}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const placeholder = target.nextElementSibling as HTMLElement;
+                  if (placeholder) placeholder.style.display = 'block';
+                }}
+              />
+              <div className="lightbox-placeholder" style={{ display: 'none' }}>
                 <span className="lightbox-icon">
                   {getCategoryIcon(selectedImage.category)}
                 </span>
@@ -132,7 +188,8 @@ const Gallery: React.FC = () => {
             </div>
             <div className="lightbox-info">
               <h3>{selectedImage.alt}</h3>
-              <p>Category: {selectedImage.category.replace('-', ' ')}</p>
+              <p className="lightbox-category">Category: {selectedImage.category.replace('-', ' ')}</p>
+              <p className="lightbox-price">Price: {selectedImage.price}</p>
             </div>
           </div>
         </div>

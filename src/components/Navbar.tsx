@@ -46,7 +46,8 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="navbar-logo">
             <a href="#home" onClick={(e) => { e.preventDefault(); handleNavLinkClick('#home'); }}>
-              <span className="logo-text">Re</span>
+              <img src="/logo.jpeg" alt="Re Beauty Salon" className="logo-image" />
+              <span className="logo-text">Re Beauty Salon</span>
             </a>
           </div>
 

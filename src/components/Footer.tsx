@@ -82,10 +82,7 @@ const Footer: React.FC = () => {
                 <a href="#services" className="footer-link">Cornrows</a>
               </li>
               <li className="footer-link-item">
-                <a href="#services" className="footer-link">Faux Locs</a>
-              </li>
-              <li className="footer-link-item">
-                <a href="#services" className="footer-link">Lashes Installation</a>
+                <a href="#services" className="footer-link">Lash Extensions</a>
               </li>
             </ul>
           </div>
@@ -96,15 +93,15 @@ const Footer: React.FC = () => {
             <div className="footer-contact">
               <div className="contact-item">
                 <span className="contact-icon">📍</span>
-                <span className="contact-text">123 Beauty Street, Sandton</span>
+                <span className="contact-text">House No. 389 Alpheus Manthape St, Nancefield, Musina</span>
               </div>
               <div className="contact-item">
                 <span className="contact-icon">📞</span>
-                <span className="contact-text">+27 12 345 6789</span>
+                <span className="contact-text">076 514 0211</span>
               </div>
               <div className="contact-item">
                 <span className="contact-icon">📧</span>
-                <span className="contact-text">info@resalon.co.za</span>
+                <span className="contact-text">mudetorenee@gmail.com</span>
               </div>
             </div>
           </div>

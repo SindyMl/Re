@@ -19,8 +19,8 @@ const Contact: React.FC = () => {
   const services = [
     'Box Braids',
     'Cornrows',
-    'Faux Locs',
-    'Lashes Installation',
+    'Lash Extensions (With Your Own)',
+    'Lash Extensions (Without Your Own)',
     'Consultation'
   ];
 
@@ -37,26 +37,43 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     setSubmitMessage('');
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitMessage('Thank you for your booking request! We will contact you within 24 hours to confirm your appointment.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        date: '',
-        time: '',
-        message: ''
+    try {
+      const response = await fetch('/api/book-appointment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }, 2000);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitMessage(data.message || 'Thank you for your booking request! We will contact you within 24 hours to confirm your appointment.');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          date: '',
+          time: '',
+          message: ''
+        });
+      } else {
+        setSubmitMessage(`Error: ${data.error || 'Failed to submit booking. Please try again or call us directly.'}`);
+      }
+    } catch (error) {
+      console.error('Booking submission error:', error);
+      setSubmitMessage('Network error. Please check your connection and try again, or call us directly at 076 514 0211.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const salonInfo = {
-    address: '123 Beauty Street, Sandton, Johannesburg, 2196',
-    phone: '+27 12 345 6789',
-    email: 'info@resalon.co.za',
+    address: 'House No. 389 Alpheus Manthape Street, Nancefield, Musina, 0900',
+    phone: '076 514 0211',
+    email: 'mudetorenee@gmail.com',
     hours: {
       'Monday': '9:00 AM - 7:00 PM',
       'Tuesday': '9:00 AM - 7:00 PM',
@@ -72,13 +89,13 @@ const Contact: React.FC = () => {
     <section id="contact" className="section contact-section">
       <div className="container">
         <h2 className="section-title">Book Your Appointment</h2>
-        
+
         <div className="contact-content">
           {/* Booking Form */}
           <div className="contact-form-container">
             <form className="contact-form" onSubmit={handleSubmit}>
               <h3 className="form-title">Schedule Your Visit</h3>
-              
+
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="name" className="form-label">Full Name *</label>
@@ -92,7 +109,7 @@ const Contact: React.FC = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="form-group">
                   <label htmlFor="email" className="form-label">Email Address *</label>
                   <input
@@ -106,7 +123,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="phone" className="form-label">Phone Number *</label>
@@ -120,7 +137,7 @@ const Contact: React.FC = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="form-group">
                   <label htmlFor="service" className="form-label">Service *</label>
                   <select
@@ -140,7 +157,7 @@ const Contact: React.FC = () => {
                   </select>
                 </div>
               </div>
-              
+
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="date" className="form-label">Preferred Date *</label>
@@ -155,7 +172,7 @@ const Contact: React.FC = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="form-group">
                   <label htmlFor="time" className="form-label">Preferred Time *</label>
                   <select
@@ -179,7 +196,7 @@ const Contact: React.FC = () => {
                   </select>
                 </div>
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="message" className="form-label">Additional Notes</label>
                 <textarea
@@ -191,7 +208,7 @@ const Contact: React.FC = () => {
                   placeholder="Any special requests or questions..."
                 />
               </div>
-              
+
               <button
                 type="submit"
                 className="btn contact-btn"
@@ -199,7 +216,7 @@ const Contact: React.FC = () => {
               >
                 {isSubmitting ? 'Submitting...' : 'Book Appointment'}
               </button>
-              
+
               {submitMessage && (
                 <div className="submit-message">
                   {submitMessage}
@@ -207,12 +224,12 @@ const Contact: React.FC = () => {
               )}
             </form>
           </div>
-          
+
           {/* Salon Information */}
           <div className="contact-info">
             <div className="info-card card">
               <h3 className="info-title">Salon Information</h3>
-              
+
               <div className="info-item">
                 <span className="info-icon">📍</span>
                 <div className="info-content">
@@ -220,7 +237,7 @@ const Contact: React.FC = () => {
                   <p>{salonInfo.address}</p>
                 </div>
               </div>
-              
+
               <div className="info-item">
                 <span className="info-icon">📞</span>
                 <div className="info-content">
@@ -228,7 +245,7 @@ const Contact: React.FC = () => {
                   <p>{salonInfo.phone}</p>
                 </div>
               </div>
-              
+
               <div className="info-item">
                 <span className="info-icon">📧</span>
                 <div className="info-content">
@@ -236,7 +253,7 @@ const Contact: React.FC = () => {
                   <p>{salonInfo.email}</p>
                 </div>
               </div>
-              
+
               <div className="info-item">
                 <span className="info-icon">🕐</span>
                 <div className="info-content">
@@ -252,14 +269,19 @@ const Contact: React.FC = () => {
                 </div>
               </div>
             </div>
-            
-            {/* Map Placeholder */}
-            <div className="map-placeholder">
-              <div className="map-content">
-                <span className="map-icon">🗺️</span>
-                <p>Interactive Map</p>
-                <small>123 Beauty Street, Sandton</small>
-              </div>
+
+            {/* Google Maps */}
+            <div className="map-container">
+              <iframe
+                src="https://maps.google.com/maps?q=-22.33339,30.03396&t=&z=18&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Re Beauty Salon Location"
+              />
             </div>
           </div>
         </div>

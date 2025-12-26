@@ -5,7 +5,15 @@ const Hero: React.FC = () => {
   const handleBookNow = () => {
     const contactSection = document.querySelector('#contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      // Scroll to contact section with offset for fixed navbar
+      const navbarHeight = 80;
+      const elementPosition = contactSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -24,10 +32,10 @@ const Hero: React.FC = () => {
               Expert Hair Braiding and Lashes
             </p>
             <p className="hero-description">
-              Discover the art of beauty with our premium services including box braids, cornrows, 
+              Discover the art of beauty with our premium services including box braids, cornrows,
               faux locs, and professional lash installations. Where elegance meets expertise.
             </p>
-            <button 
+            <button
               className="btn hero-btn"
               onClick={handleBookNow}
             >
@@ -35,12 +43,11 @@ const Hero: React.FC = () => {
             </button>
           </div>
           <div className="hero-image">
-            <div className="hero-image-placeholder">
-              <div className="placeholder-content">
-                <div className="placeholder-icon">✨</div>
-                <p>Beautiful Hair & Lashes</p>
-              </div>
-            </div>
+            <img
+              src="/logo.jpeg"
+              alt="Re Beauty Salon"
+              className="hero-logo-image"
+            />
           </div>
         </div>
       </div>

@@ -14,6 +14,7 @@ export interface GalleryImage {
   url: string;
   alt: string;
   category: string;
+  price: string;
 }
 
 export interface ContactForm {

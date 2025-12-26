@@ -145,77 +145,21 @@
   color: var(--dark-gray);
 }
 
-/* Map Placeholder */
-.map-placeholder {
+/* Google Maps Container */
+.map-container {
   width: 100%;
   height: 300px;
-  background: linear-gradient(135deg, var(--light-beige), var(--medium-beige));
   border-radius: var(--border-radius-xl);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: var(--shadow-medium);
   border: 2px solid var(--medium-beige);
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 
-.map-placeholder::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(139, 69, 19, 0.1),
-    transparent
-  );
-  animation: mapShimmer 4s infinite;
-}
-
-@keyframes mapShimmer {
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
-  }
-}
-
-.map-content {
-  text-align: center;
-  z-index: 1;
-}
-
-.map-icon {
+.map-container iframe {
   display: block;
-  font-size: 3rem;
-  margin-bottom: var(--spacing-sm);
-  animation: gentle-bounce 2s ease-in-out infinite;
-}
-
-@keyframes gentle-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.map-content p {
-  font-size: 1.2rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--primary-brown);
-  margin-bottom: var(--spacing-xs);
-}
-
-.map-content small {
-  font-size: 0.9rem;
-  color: var(--medium-brown);
+  width: 100%;
+  height: 100%;
 }
 
 /* Responsive Design */
@@ -242,7 +186,7 @@
     padding: var(--spacing-md);
   }
 
-  .map-placeholder {
+  .map-container {
     height: 250px;
   }
 }
@@ -282,16 +226,8 @@
     font-size: 0.9rem;
   }
 
-  .map-placeholder {
+  .map-container {
     height: 200px;
-  }
-
-  .map-icon {
-    font-size: 2.5rem;
-  }
-
-  .map-content p {
-    font-size: 1rem;
   }
 }
 
@@ -329,12 +265,8 @@
     gap: 2px;
   }
 
-  .map-placeholder {
+  .map-container {
     height: 180px;
-  }
-
-  .map-icon {
-    font-size: 2rem;
   }
 }
 
@@ -375,15 +307,23 @@
 
 .contact-form-container,
 .info-card,
-.map-placeholder {
+.map-container {
   opacity: 0;
   transform: translateY(30px);
   animation: slideInUp 0.8s ease forwards;
 }
 
-.contact-form-container { animation-delay: 0.2s; }
-.info-card { animation-delay: 0.4s; }
-.map-placeholder { animation-delay: 0.6s; }
+.contact-form-container {
+  animation-delay: 0.2s;
+}
+
+.info-card {
+  animation-delay: 0.4s;
+}
+
+.map-container {
+  animation-delay: 0.6s;
+}
 
 @keyframes slideInUp {
   to {

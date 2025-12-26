@@ -38,7 +38,12 @@ const Contact: React.FC = () => {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/book-appointment', {
+      // Use production API URL if running locally, otherwise use relative path
+      const apiUrl = process.env.NODE_ENV === 'production'
+        ? '/api/book-appointment'
+        : process.env.REACT_APP_API_URL || 'https://re-ruddy-rho.vercel.app/api/book-appointment';
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

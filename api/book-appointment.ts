@@ -1,9 +1,10 @@
+const sgMail = require('@sendgrid/mail');
+const { sql } = require('@vercel/postgres');
+const { google } = require('googleapis');
+const twilio = require('twilio');
+const nodemailer = require('nodemailer');
+
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import sgMail from '@sendgrid/mail';
-import { sql } from '@vercel/postgres';
-import { google } from 'googleapis';
-import twilio from 'twilio';
-import nodemailer from 'nodemailer';
 
 // CORS headers
 const corsHeaders = {
@@ -436,3 +437,5 @@ function formatCustomerConfirmationHTML(data: BookingData): string {
 </html>
   `;
 }
+
+module.exports = handler;
